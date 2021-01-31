@@ -12,6 +12,10 @@
           "named": true
         },
         {
+          "type": "attribute_name",
+          "named": true
+        },
+        {
           "type": "default_decl",
           "named": true
         }
@@ -110,28 +114,15 @@
     "fields": {}
   },
   {
-    "type": "cdata_end",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "cdata_sect",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "cdata",
-          "named": true
-        },
-        {
-          "type": "cdata_end",
-          "named": true
-        },
-        {
-          "type": "cdata_start",
           "named": true
         }
       ]
@@ -180,41 +171,6 @@
         },
         {
           "type": "include_sect",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "content",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "cdata_sect",
-          "named": true
-        },
-        {
-          "type": "char_data",
-          "named": true
-        },
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "element",
-          "named": true
-        },
-        {
-          "type": "processing_instructions",
-          "named": true
-        },
-        {
-          "type": "reference",
           "named": true
         }
       ]
@@ -274,7 +230,59 @@
     }
   },
   {
+    "type": "doctype",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "doctype_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attlist_decl",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element_decl",
+          "named": true
+        },
+        {
+          "type": "entity_decl",
+          "named": true
+        },
+        {
+          "type": "external_id",
+          "named": true
+        },
+        {
+          "type": "notation_decl",
+          "named": true
+        },
+        {
+          "type": "pe_reference",
+          "named": true
+        },
+        {
+          "type": "processing_instructions",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
     "named": true,
     "fields": {},
     "children": {
@@ -282,15 +290,15 @@
       "required": false,
       "types": [
         {
-          "type": "external_id",
+          "type": "element",
           "named": true
         },
         {
-          "type": "markup_decl",
+          "type": "misc",
           "named": true
         },
         {
-          "type": "pe_reference",
+          "type": "prolog",
           "named": true
         }
       ]
@@ -305,7 +313,15 @@
       "required": true,
       "types": [
         {
-          "type": "content",
+          "type": "cdata_sect",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "element",
           "named": true
         },
         {
@@ -317,7 +333,19 @@
           "named": true
         },
         {
+          "type": "processing_instructions",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "start_tag",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         }
       ]
@@ -397,24 +425,9 @@
     }
   },
   {
-    "type": "enc_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "encoding_decl",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enc_name",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "end_tag",
@@ -554,34 +567,7 @@
       "required": true,
       "types": [
         {
-          "type": "conditional_sect",
-          "named": true
-        },
-        {
-          "type": "markup_decl",
-          "named": true
-        },
-        {
-          "type": "pe_reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fragment",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "cdata_sect",
-          "named": true
-        },
-        {
-          "type": "char_data",
+          "type": "attlist_decl",
           "named": true
         },
         {
@@ -593,19 +579,7 @@
           "named": true
         },
         {
-          "type": "doctype_decl",
-          "named": true
-        },
-        {
           "type": "element_decl",
-          "named": true
-        },
-        {
-          "type": "empty_elem_tag",
-          "named": true
-        },
-        {
-          "type": "end_tag",
           "named": true
         },
         {
@@ -617,19 +591,11 @@
           "named": true
         },
         {
+          "type": "pe_reference",
+          "named": true
+        },
+        {
           "type": "processing_instructions",
-          "named": true
-        },
-        {
-          "type": "start_tag",
-          "named": true
-        },
-        {
-          "type": "text_decl",
-          "named": true
-        },
-        {
-          "type": "xml_decl",
           "named": true
         }
       ]
@@ -649,11 +615,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "iana_code",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "ignore",
@@ -710,67 +671,9 @@
     }
   },
   {
-    "type": "iso639_code",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "langcode",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "iana_code",
-          "named": true
-        },
-        {
-          "type": "iso639_code",
-          "named": true
-        },
-        {
-          "type": "user_code",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "markup_decl",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "attlist_decl",
-          "named": true
-        },
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "element_decl",
-          "named": true
-        },
-        {
-          "type": "entity_decl",
-          "named": true
-        },
-        {
-          "type": "notation_decl",
-          "named": true
-        },
-        {
-          "type": "processing_instructions",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "misc",
@@ -929,6 +832,29 @@
     }
   },
   {
+    "type": "prolog",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "doctype_decl",
+          "named": true
+        },
+        {
+          "type": "misc",
+          "named": true
+        },
+        {
+          "type": "xml_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pubid_literal",
     "named": true,
     "fields": {},
@@ -1033,11 +959,6 @@
   },
   {
     "type": "tokenized_type",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "user_code",
     "named": true,
     "fields": {}
   },
@@ -1306,14 +1227,6 @@
     "named": false
   },
   {
-    "type": "cdata_start",
-    "named": true
-  },
-  {
-    "type": "char_data",
-    "named": true
-  },
-  {
     "type": "encoding",
     "named": false
   },
@@ -1335,6 +1248,10 @@
   },
   {
     "type": "string_type",
+    "named": true
+  },
+  {
+    "type": "text",
     "named": true
   },
   {

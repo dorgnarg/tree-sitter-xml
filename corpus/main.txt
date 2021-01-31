@@ -5,21 +5,23 @@ Prolog
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 ---
 
-(fragment
-    (xml_decl (version_info) (encoding_decl (enc_name)) (standalone_decl))
-    (doctype_decl (external_id (system_literal))))
+(document
+    (prolog
+    (xml_decl (version_info) (encoding_decl) (standalone_decl)) (misc)
+    (doctype_decl (doctype) (external_id (system_literal)))))
 
 ==================================
 Tags
 ==================================
-<SPAN></SPAN>
+<ARTIST></ARTIST>
 ---
 
-(fragment
+(document
+    (element
     (start_tag
         (tag_name))
     (end_tag
-        (tag_name)))
+        (tag_name))))
 
 ==================================
 Tags with attributes
@@ -27,15 +29,16 @@ Tags with attributes
 <SPAN id="id" class='class'></SPAN>
 ---
 
-(fragment
-    (start_tag 
+(document
+    (element
+    (start_tag
         (tag_name)
         (attribute
             (attribute_name) (attribute_value))
         (attribute
             (attribute_name) (attribute_value)))
     (end_tag
-        (tag_name)))
+        (tag_name))))
 
 ==================================
 Nested tags
@@ -43,16 +46,18 @@ Nested tags
 <SPAN><div>Content</div></SPAN>
 ---
 
-(fragment
+(document
+    (element
     (start_tag
         (tag_name))
+        (element
         (start_tag
             (tag_name))
-            (char_data)
+            (text)
         (end_tag
-            (tag_name))
+            (tag_name)))
     (end_tag
-        (tag_name)))
+        (tag_name))))
 
 ==================================
 Empty element tags
@@ -60,9 +65,10 @@ Empty element tags
 <span />
 ---
 
-(fragment
-    (empty_elem_tag
-        (tag_name)))
+(document
+    (element
+        (empty_elem_tag
+            (tag_name))))
 
 ==================================
 Empty element tags with attributes
@@ -70,13 +76,14 @@ Empty element tags with attributes
 <span id="id" class='class' />
 ---
 
-(fragment
-    (empty_elem_tag 
-        (tag_name)
-        (attribute
-            (attribute_name) (attribute_value))
-        (attribute
-            (attribute_name) (attribute_value))))
+(document
+    (element
+        (empty_elem_tag
+            (tag_name)
+            (attribute
+                (attribute_name) (attribute_value))
+            (attribute
+                (attribute_name) (attribute_value)))))
 
 ==================================
 Comments
@@ -84,5 +91,5 @@ Comments
 <!-- This is a comment! -->
 ---
 
-(fragment
-    (comment))
+(document (misc
+    (comment)))
