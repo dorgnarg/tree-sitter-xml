@@ -3,11 +3,11 @@ XML Grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter)
 
 [Based on the W3C XML 1.0 recommendation](https://www.w3.org/TR/REC-xml/)
 
-Example files come from W3C samples as well.
+Example files come from W3C samples, [generated data](www.generatedata.com), and [wikimedia dumps](https://dumps.wikimedia.org/).
 
 Finished sections from the XML specification:
 
-- [ ] Document
+- [x] Document
 - [x] Character Range (currently doing with `/./`)
 - [x] White Space (currently doing with `/\s/`)
 - [x] Names and Tokens
@@ -43,6 +43,6 @@ Finished sections from the XML specification:
 - [x] Encoding Declaration
 - [x] Encoding Declaration
 - [x] Notation Declarations
-- [ ] Characters
+- [x] Characters
 
 *Note that these just mean I have literally written them in, I'm still working on organization and figuring out what needs to be visible/hidden. Help is appreciated!*

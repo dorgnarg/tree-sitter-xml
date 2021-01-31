@@ -7,8 +7,26 @@ Prolog
 
 (document
     (prolog
-    (xml_decl (version_info) (encoding_decl) (standalone_decl)) (misc)
+    (xml_decl (version_info) (encoding_decl) (standalone_decl))
     (doctype_decl (doctype) (external_id (system_literal)))))
+
+
+==================================
+Element declaration
+==================================
+<!DOCTYPE greeting [
+    <!ELEMENT greeting (#PCDATA)>
+]>
+---
+
+(document
+    (prolog
+    (doctype_decl
+        (doctype)
+        (element_decl
+            (element_name)
+            (content_spec
+                (mixed))))))
 
 ==================================
 Tags
@@ -60,18 +78,7 @@ Nested tags
         (tag_name))))
 
 ==================================
-Empty element tags
-==================================
-<span />
----
-
-(document
-    (element
-        (empty_elem_tag
-            (tag_name))))
-
-==================================
-Empty element tags with attributes
+Empty element tags (w/ attributes)
 ==================================
 <span id="id" class='class' />
 ---
@@ -91,5 +98,4 @@ Comments
 <!-- This is a comment! -->
 ---
 
-(document (misc
-    (comment)))
+(document (comment))

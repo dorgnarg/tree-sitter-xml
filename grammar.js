@@ -3,11 +3,15 @@ module.exports = grammar({
 
     extras: $ => [],
 
+    inline: $ => [
+        $._eq
+    ],
+
     rules: {
         document: $ => seq(
             repeat($.prolog),
             repeat($.element),
-            repeat($.misc)
+            repeat($._misc)
         ),
 
         /** Names and Tokens **/
@@ -37,7 +41,7 @@ module.exports = grammar({
             choice (
                 /\w/,
                 '_',
-                ':'
+                ':',
             ),
             repeat (
                 $._name_char
@@ -128,8 +132,7 @@ module.exports = grammar({
 
         /** Character Data **/
 
-        // char_data: $ => /[^<&]* - ([^<&]* ']]>' [^<&]*)/,
-        char_data: $ => /[^<&]*/,
+        _char_data: $ => /[^<&]+/,
 
         /** Comments **/
 
@@ -156,7 +159,7 @@ module.exports = grammar({
             '?>'
         ),
 
-        pi_target: $ => $._name, // this should exclude [Xx][Mm][Ll] too but I can't figure out how to do that yet
+        pi_target: $ => $._name, // This should exclude [Xx][Mm][Ll] eventually too
 
         /** CDATA Sections **/
 
@@ -177,18 +180,18 @@ module.exports = grammar({
         prolog: $ => prec.right(choice(
             seq(
                 $.xml_decl,
-                optional($.misc),
+                optional($._misc),
             ),
             seq(
                 $.xml_decl,
-                optional($.misc),
+                optional($._misc),
                 $.doctype_decl,
-                optional($.misc)
+                optional($._misc),
             ),
             seq(
-                optional($.misc),
+                optional($._misc),
                 $.doctype_decl,
-                optional($.misc)
+                optional($._misc)
             ),
         )),
 
@@ -208,14 +211,12 @@ module.exports = grammar({
             choice(
                 seq(
                     '"',
-                    '1.',
-                    /[0-9]+/,
+                    $._version_num,
                     '"'
                 ),
                 seq(
                     "'",
-                    '1.',
-                    /[0-9]+/,
+                    $._version_num,
                     "'"
                 )
             ),
@@ -227,12 +228,12 @@ module.exports = grammar({
             optional(/\s/),
         ),
 
-        version_num: $ => repeat1( choice(
-            /[a-zA-Z0-9_.:]/,
-            '-'
-        )),
+        _version_num: $ => seq (
+            '1.',
+            /[0-9]+/,
+        ),
 
-        misc: $ => choice(
+        _misc: $ => choice(
             $.comment,
             $.processing_instructions,
             /\s/
@@ -244,7 +245,6 @@ module.exports = grammar({
             '<!DOCTYPE',
             /\s/,
             alias($._name,$.doctype),
-            // $._name,
             optional(seq(/\s/, $.external_id)),
             optional(/\s/),
             optional(seq(
@@ -374,12 +374,12 @@ module.exports = grammar({
         /** Element **/
 
         element: $ => choice(
-            $.empty_elem_tag,
             seq(
                 $.start_tag,
                 optional($._content),
                 $.end_tag
-            )
+            ),
+            $.empty_elem_tag,
         ),
 
         /** Start-tag **/
@@ -405,7 +405,7 @@ module.exports = grammar({
 
         /** End-tag **/
 
-        end_tag: $ => seq ( // TODO: Make sure closing tag matches opening tag
+        end_tag: $ => seq ( // TODO: Make sure closing tag matches opening tag?
             '</',
             alias($._name, $.tag_name),
             optional(/\s/),
@@ -417,11 +417,10 @@ module.exports = grammar({
         _content: $ => repeat1 ( choice (
             $.element,
             $.cdata_sect,
-            alias($.char_data, $.text),
+            alias($._char_data, $.text),
             $.reference,
             $.processing_instructions,
             $.comment,
-            // $.text,
         )),
 
         /** Tags for Empty Elements **/
@@ -448,7 +447,7 @@ module.exports = grammar({
             /\s/,
             $.content_spec,
             optional(/\s/),
-            '/>'
+            '>'
         ),
 
         content_spec: $ => choice(
@@ -519,7 +518,7 @@ module.exports = grammar({
 
         /** Mixed-content Declaration **/
 
-        mixed: $ => choice(
+        mixed: $ => prec.right(choice(
             seq(
                 '(',
                 optional(/\s/),
@@ -542,7 +541,7 @@ module.exports = grammar({
                 optional(/\s/),
                 ')'
             ),
-        ),
+        )),
 
         /** Attribute-list Declaration **/
 
@@ -550,31 +549,31 @@ module.exports = grammar({
             '<!ATTLIST',
             /\s/,
             alias($._name, $.attlist_name),
-            repeat($.att_def),
+            repeat($.attribute_def),
             optional(/\s/),
             '>'
         ),
 
-        att_def: $ => seq(
+        attribute_def: $ => seq(
             /\s/,
             alias($._name, $.attribute_name),
             /\s/,
-            $.att_type,
+            $.attribute_type,
             /\s/,
             $.default_decl
         ),
 
         /** Attribute Types **/
 
-        att_type: $ => choice(
-            $.string_type,
-            $.tokenized_type,
-            $.enumerated_type
+        attribute_type: $ => choice(
+            $._string_type,
+            $._tokenized_type,
+            $._enumerated_type
         ),
 
-        string_type: $ => 'CDATA',
+        _string_type: $ => 'CDATA',
 
-        tokenized_type: $ => choice(
+        _tokenized_type: $ => choice(
             'ID',
             'IDREF',
             'IDREFS',
@@ -586,7 +585,7 @@ module.exports = grammar({
 
         /** Enumerated Attribute Types **/
 
-        enumerated_type: $ => choice (
+        _enumerated_type: $ => choice (
             $.notation_type,
             $.enumeration
         ),
@@ -699,11 +698,7 @@ module.exports = grammar({
         /** Entity Reference **/
 
         reference: $ => choice (
-            seq(
-                '&',
-                $._name,
-                ';'
-            ),
+            $.entity_ref,
             $.char_ref
         ),
 
@@ -813,9 +808,7 @@ module.exports = grammar({
         encoding_decl: $ => seq(
             /\s/,
             'encoding',
-            optional(/\s/),
-            '=',
-            optional(/\s/),
+            $._eq,
             choice(
                 seq(
                     '"',
@@ -834,7 +827,7 @@ module.exports = grammar({
             /[A-Za-z]/,
             repeat(
                 choice(
-                    /[A-Za-z0-9]/,
+                    /[A-Za-z0-9._]/,
                     '-',
                 ),
             ),

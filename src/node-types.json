@@ -1,51 +1,5 @@
 [
   {
-    "type": "att_def",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "att_type",
-          "named": true
-        },
-        {
-          "type": "attribute_name",
-          "named": true
-        },
-        {
-          "type": "default_decl",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "att_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enumerated_type",
-          "named": true
-        },
-        {
-          "type": "string_type",
-          "named": true
-        },
-        {
-          "type": "tokenized_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "attlist_decl",
     "named": true,
     "fields": {},
@@ -54,11 +8,11 @@
       "required": true,
       "types": [
         {
-          "type": "att_def",
+          "type": "attlist_name",
           "named": true
         },
         {
-          "type": "attlist_name",
+          "type": "attribute_def",
           "named": true
         }
       ]
@@ -89,9 +43,51 @@
     }
   },
   {
+    "type": "attribute_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute_name",
+          "named": true
+        },
+        {
+          "type": "attribute_type",
+          "named": true
+        },
+        {
+          "type": "default_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "attribute_name",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "attribute_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "enumeration",
+          "named": true
+        },
+        {
+          "type": "notation_type",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "attribute_value",
@@ -290,11 +286,15 @@
       "required": false,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "element",
           "named": true
         },
         {
-          "type": "misc",
+          "type": "processing_instructions",
           "named": true
         },
         {
@@ -487,6 +487,11 @@
     }
   },
   {
+    "type": "entity_ref",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "entity_value",
     "named": true,
     "fields": {},
@@ -500,25 +505,6 @@
         },
         {
           "type": "reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "enumerated_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enumeration",
-          "named": true
-        },
-        {
-          "type": "notation_type",
           "named": true
         }
       ]
@@ -676,25 +662,6 @@
     "fields": {}
   },
   {
-    "type": "misc",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "processing_instructions",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "mixed",
     "named": true,
     "fields": {}
@@ -840,11 +807,15 @@
       "required": true,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "doctype_decl",
           "named": true
         },
         {
-          "type": "misc",
+          "type": "processing_instructions",
           "named": true
         },
         {
@@ -890,10 +861,14 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "char_ref",
+          "named": true
+        },
+        {
+          "type": "entity_ref",
           "named": true
         }
       ]
@@ -956,11 +931,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "tokenized_type",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "version_info",
@@ -1245,10 +1215,6 @@
   {
     "type": "standalone",
     "named": false
-  },
-  {
-    "type": "string_type",
-    "named": true
   },
   {
     "type": "text",
