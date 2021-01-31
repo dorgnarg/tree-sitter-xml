@@ -17,7 +17,7 @@ Finished sections from the XML specification:
 - [x] Processing Instructions (*haven't quite finished the pi_target definition*)
 - [x] CDATA Sections (*not sure about the cdata element, I need to test it more*)
 - [x] Prolog
-- [ ] Document Type Definition
+- [x] Document Type Definition
 - [x] External Subset
 - [x] Standalone Document Declaration
 - [x] Language Identification

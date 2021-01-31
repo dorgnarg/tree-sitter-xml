@@ -7,17 +7,21 @@ module.exports = grammar({
         ),
 
         _node: $ => choice(
+            $.comment,
+            $.processing_instructions,
+            $.cdata_sect,
             $.xml_decl,
             $.doctype_decl,
             $.start_tag,
             $.end_tag,
             $.empty_elem_tag,
-            $.comment,
-            $.text,
-            $.cdata_sect,
+            $.element_decl,
+            $.conditional_sect,
+            $.entity_decl,
+            $.text_decl,
+            $.notation_decl,
             $.char_data,
-            $.reference,
-            $.processing_instructions,
+            // $.text,
         ),
 
         /** Names and Tokens **/
@@ -127,8 +131,9 @@ module.exports = grammar({
 
         /** Character Data **/
 
-        char_data: $ => /[^<&]* - ([^<&]* ']]>' [^<&]*)/,
-        text: $ => /[^<>]+/,
+        // char_data: $ => /[^<&]* - ([^<&]* ']]>' [^<&]*)/,
+        char_data: $ => /[^<&]*/,
+        // text: $ => /[^<>]+/,
 
         /** Comments **/
 
@@ -231,7 +236,8 @@ module.exports = grammar({
         doctype_decl: $ => seq (
             '<!DOCTYPE',
             /\s/,
-            alias($._name,$.doctype),
+            // alias($._name,$.doctype),
+            $._name,
             optional(seq(/\s/, $.external_id)),
             optional(/\s/),
             optional(seq(
@@ -408,7 +414,7 @@ module.exports = grammar({
             $.reference,
             $.processing_instructions,
             $.comment,
-            $.text,
+            // $.text,
         )),
 
         /** Tags for Empty Elements **/
@@ -476,7 +482,7 @@ module.exports = grammar({
             '(',
             optional(/\s/),
             $.cp,
-            repeat(
+            repeat1(
                 seq(
                     optional(/\s/),
                     '|',
@@ -735,13 +741,13 @@ module.exports = grammar({
             '>'
         ),
 
-        entity_def: $ => choice(
+        entity_def: $ => prec.left(choice(
             $.entity_value,
             seq(
                 $.external_id,
                 optional($.ndata_decl)
             )
-        ),
+        )),
 
         pe_def: $ => choice(
             $.entity_value,
@@ -842,11 +848,11 @@ module.exports = grammar({
             '>'
         ),
 
-        public_id: $ => seq(
+        public_id: $ => prec.left(seq(
             'PUBLIC',
             /\s/,
             $.pubid_literal
-        ),
+        )),
 
     }
 })

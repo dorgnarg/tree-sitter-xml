@@ -5,7 +5,9 @@ Prolog
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 ---
 
-(fragment (xmldecl (encoding_decl) (standalone_decl)) (doctype (doctype_name) (external_id)))
+(fragment
+    (xml_decl (version_info) (encoding_decl (enc_name)) (standalone_decl))
+    (doctype_decl (external_id (system_literal))))
 
 ==================================
 Tags
@@ -46,7 +48,7 @@ Nested tags
         (tag_name))
         (start_tag
             (tag_name))
-            (text)
+            (char_data)
         (end_tag
             (tag_name))
     (end_tag

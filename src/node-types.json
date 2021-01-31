@@ -105,11 +105,6 @@
     }
   },
   {
-    "type": "cd_sect",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "cdata",
     "named": true,
     "fields": {}
@@ -118,6 +113,29 @@
     "type": "cdata_end",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "cdata_sect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cdata",
+          "named": true
+        },
+        {
+          "type": "cdata_end",
+          "named": true
+        },
+        {
+          "type": "cdata_start",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "char_ref",
@@ -176,7 +194,7 @@
       "required": true,
       "types": [
         {
-          "type": "cd_sect",
+          "type": "cdata_sect",
           "named": true
         },
         {
@@ -197,10 +215,6 @@
         },
         {
           "type": "reference",
-          "named": true
-        },
-        {
-          "type": "text",
           "named": true
         }
       ]
@@ -260,48 +274,23 @@
     }
   },
   {
-    "type": "doctype",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "doctype_decl",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "attlist_name",
-          "named": true
-        },
-        {
-          "type": "attribute_name",
-          "named": true
-        },
-        {
-          "type": "attribute_value",
-          "named": true
-        },
-        {
-          "type": "doctype",
-          "named": true
-        },
-        {
-          "type": "element_name",
-          "named": true
-        },
-        {
-          "type": "entity_name",
-          "named": true
-        },
         {
           "type": "external_id",
           "named": true
         },
         {
-          "type": "notation_name",
+          "type": "markup_decl",
+          "named": true
+        },
+        {
+          "type": "pe_reference",
           "named": true
         }
       ]
@@ -485,11 +474,6 @@
     }
   },
   {
-    "type": "entity_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "entity_value",
     "named": true,
     "fields": {},
@@ -593,7 +577,7 @@
       "required": false,
       "types": [
         {
-          "type": "cd_sect",
+          "type": "cdata_sect",
           "named": true
         },
         {
@@ -605,7 +589,15 @@
           "named": true
         },
         {
+          "type": "conditional_sect",
+          "named": true
+        },
+        {
           "type": "doctype_decl",
+          "named": true
+        },
+        {
+          "type": "element_decl",
           "named": true
         },
         {
@@ -617,11 +609,15 @@
           "named": true
         },
         {
-          "type": "processing_instructions",
+          "type": "entity_decl",
           "named": true
         },
         {
-          "type": "reference",
+          "type": "notation_decl",
+          "named": true
+        },
+        {
+          "type": "processing_instructions",
           "named": true
         },
         {
@@ -629,7 +625,7 @@
           "named": true
         },
         {
-          "type": "text",
+          "type": "text_decl",
           "named": true
         },
         {
@@ -1002,11 +998,6 @@
     }
   },
   {
-    "type": "string_type",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "sub_code",
     "named": true,
     "fields": {}
@@ -1183,10 +1174,6 @@
     "named": false
   },
   {
-    "type": "<!CDATA[",
-    "named": false
-  },
-  {
     "type": "<!DOCTYPE",
     "named": false
   },
@@ -1236,10 +1223,6 @@
   },
   {
     "type": "ANY",
-    "named": false
-  },
-  {
-    "type": "CDATA",
     "named": false
   },
   {
@@ -1351,7 +1334,7 @@
     "named": false
   },
   {
-    "type": "text",
+    "type": "string_type",
     "named": true
   },
   {

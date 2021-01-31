@@ -18,6 +18,18 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "processing_instructions"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "cdata_sect"
+        },
+        {
+          "type": "SYMBOL",
           "name": "xml_decl"
         },
         {
@@ -38,27 +50,27 @@
         },
         {
           "type": "SYMBOL",
-          "name": "comment"
+          "name": "element_decl"
         },
         {
           "type": "SYMBOL",
-          "name": "text"
+          "name": "conditional_sect"
         },
         {
           "type": "SYMBOL",
-          "name": "cdata_sect"
+          "name": "entity_decl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text_decl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "notation_decl"
         },
         {
           "type": "SYMBOL",
           "name": "char_data"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "reference"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "processing_instructions"
         }
       ]
     },
@@ -364,11 +376,7 @@
     },
     "char_data": {
       "type": "PATTERN",
-      "value": "[^<&]* - ([^<&]* ']]>' [^<&]*)"
-    },
-    "text": {
-      "type": "PATTERN",
-      "value": "[^<>]+"
+      "value": "[^<&]*"
     },
     "comment": {
       "type": "SEQ",
@@ -716,13 +724,8 @@
           "value": "\\s"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_name"
-          },
-          "named": true,
-          "value": "doctype"
+          "type": "SYMBOL",
+          "name": "_name"
         },
         {
           "type": "CHOICE",
@@ -1286,10 +1289,6 @@
           {
             "type": "SYMBOL",
             "name": "comment"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "text"
           }
         ]
       }
@@ -1525,7 +1524,7 @@
           "name": "cp"
         },
         {
-          "type": "REPEAT",
+          "type": "REPEAT1",
           "content": {
             "type": "SEQ",
             "members": [
@@ -2507,34 +2506,38 @@
       ]
     },
     "entity_def": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "entity_value"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "external_id"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "ndata_decl"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "entity_value"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "external_id"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "ndata_decl"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "pe_def": {
       "type": "CHOICE",
@@ -2866,21 +2869,25 @@
       ]
     },
     "public_id": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "PUBLIC"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "pubid_literal"
-        }
-      ]
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "PUBLIC"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\s"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "pubid_literal"
+          }
+        ]
+      }
     }
   },
   "extras": [
