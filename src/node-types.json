@@ -1,0 +1,492 @@
+[
+  {
+    "type": "attlist_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute_name",
+          "named": true
+        },
+        {
+          "type": "attribute_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cd_sect",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "doctype",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attlist_name",
+          "named": true
+        },
+        {
+          "type": "attribute_name",
+          "named": true
+        },
+        {
+          "type": "attribute_value",
+          "named": true
+        },
+        {
+          "type": "doctype_name",
+          "named": true
+        },
+        {
+          "type": "element_name",
+          "named": true
+        },
+        {
+          "type": "entity_name",
+          "named": true
+        },
+        {
+          "type": "external_id",
+          "named": true
+        },
+        {
+          "type": "notation_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "doctype_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "element_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "empty_elem_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "tag_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "encoding_decl",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "end_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "tag_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "entity_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "external_id",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "fragment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "cd_sect",
+          "named": true
+        },
+        {
+          "type": "char_data",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "empty_elem_tag",
+          "named": true
+        },
+        {
+          "type": "end_tag",
+          "named": true
+        },
+        {
+          "type": "processing_instructions",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "start_tag",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "xmldecl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "notation_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "processing_instructions",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "reference",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "standalone_decl",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "start_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "tag_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tag_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "xmldecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "encoding_decl",
+          "named": true
+        },
+        {
+          "type": "standalone_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "#FIXED",
+    "named": false
+  },
+  {
+    "type": "#IMPLIED",
+    "named": false
+  },
+  {
+    "type": "#REQUIRED",
+    "named": false
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": "-->",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": "/>",
+    "named": false
+  },
+  {
+    "type": "1.",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<!--",
+    "named": false
+  },
+  {
+    "type": "<!ATTLIST",
+    "named": false
+  },
+  {
+    "type": "<!CDATA[",
+    "named": false
+  },
+  {
+    "type": "<!DOCTYPE",
+    "named": false
+  },
+  {
+    "type": "<!ELEMENT",
+    "named": false
+  },
+  {
+    "type": "<!ENTITY",
+    "named": false
+  },
+  {
+    "type": "<!NOTATION",
+    "named": false
+  },
+  {
+    "type": "</",
+    "named": false
+  },
+  {
+    "type": "<?",
+    "named": false
+  },
+  {
+    "type": "<?xml",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": "?>",
+    "named": false
+  },
+  {
+    "type": "ANY",
+    "named": false
+  },
+  {
+    "type": "CDATA",
+    "named": false
+  },
+  {
+    "type": "EMPTY",
+    "named": false
+  },
+  {
+    "type": "ENTITIES",
+    "named": false
+  },
+  {
+    "type": "ENTITY",
+    "named": false
+  },
+  {
+    "type": "ID",
+    "named": false
+  },
+  {
+    "type": "IDREF",
+    "named": false
+  },
+  {
+    "type": "IDREFS",
+    "named": false
+  },
+  {
+    "type": "NMTOKEN",
+    "named": false
+  },
+  {
+    "type": "NMTOKENS",
+    "named": false
+  },
+  {
+    "type": "NOTATION",
+    "named": false
+  },
+  {
+    "type": "PUBLIC",
+    "named": false
+  },
+  {
+    "type": "SYSTEM",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "]]>",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "char_data",
+    "named": true
+  },
+  {
+    "type": "encoding",
+    "named": false
+  },
+  {
+    "type": "no",
+    "named": false
+  },
+  {
+    "type": "standalone",
+    "named": false
+  },
+  {
+    "type": "text",
+    "named": true
+  },
+  {
+    "type": "version",
+    "named": false
+  },
+  {
+    "type": "yes",
+    "named": false
+  },
+  {
+    "type": "|",
+    "named": false
+  }
+]

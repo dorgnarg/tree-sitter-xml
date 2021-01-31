@@ -1,0 +1,86 @@
+==================================
+Prolog
+==================================
+<?xml version='1.0' encoding='utf8' standalone="no"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+---
+
+(fragment (xmldecl (encoding_decl) (standalone_decl)) (doctype (doctype_name) (external_id)))
+
+==================================
+Tags
+==================================
+<SPAN></SPAN>
+---
+
+(fragment
+    (start_tag
+        (tag_name))
+    (end_tag
+        (tag_name)))
+
+==================================
+Tags with attributes
+==================================
+<SPAN id="id" class='class'></SPAN>
+---
+
+(fragment
+    (start_tag 
+        (tag_name)
+        (attribute
+            (attribute_name) (attribute_value))
+        (attribute
+            (attribute_name) (attribute_value)))
+    (end_tag
+        (tag_name)))
+
+==================================
+Nested tags
+==================================
+<SPAN><div>Content</div></SPAN>
+---
+
+(fragment
+    (start_tag
+        (tag_name))
+        (start_tag
+            (tag_name))
+            (text)
+        (end_tag
+            (tag_name))
+    (end_tag
+        (tag_name)))
+
+==================================
+Empty element tags
+==================================
+<span />
+---
+
+(fragment
+    (empty_elem_tag
+        (tag_name)))
+
+==================================
+Empty element tags with attributes
+==================================
+<span id="id" class='class' />
+---
+
+(fragment
+    (empty_elem_tag 
+        (tag_name)
+        (attribute
+            (attribute_name) (attribute_value))
+        (attribute
+            (attribute_name) (attribute_value))))
+
+==================================
+Comments
+==================================
+<!-- This is a comment! -->
+---
+
+(fragment
+    (comment))
