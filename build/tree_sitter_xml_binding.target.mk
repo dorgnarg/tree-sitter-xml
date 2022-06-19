@@ -9,9 +9,12 @@ DEFS_Debug := \
 	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-DV8_DEPRECATION_WARNINGS' \
 	'-DV8_IMMINENT_DEPRECATION_WARNINGS' \
+	'-D_GLIBCXX_USE_CXX11_ABI=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-D__STDC_FORMAT_MACROS' \
+	'-DOPENSSL_NO_PINSHARED' \
+	'-DOPENSSL_THREADS' \
 	'-DBUILDING_NODE_EXTENSION' \
 	'-DDEBUG' \
 	'-D_DEBUG' \
@@ -36,16 +39,16 @@ CFLAGS_C_Debug := \
 CFLAGS_CC_Debug := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y
+	-std=gnu++14
 
 INCS_Debug := \
-	-I/home/dan/.cache/node-gyp/15.6.0/include/node \
-	-I/home/dan/.cache/node-gyp/15.6.0/src \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/openssl/config \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/openssl/openssl/include \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/uv/include \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/zlib \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/v8/include \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/include/node \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/src \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/openssl/config \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/openssl/openssl/include \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/uv/include \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/zlib \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 
@@ -56,9 +59,12 @@ DEFS_Release := \
 	'-DV8_DEPRECATION_WARNINGS=1' \
 	'-DV8_DEPRECATION_WARNINGS' \
 	'-DV8_IMMINENT_DEPRECATION_WARNINGS' \
+	'-D_GLIBCXX_USE_CXX11_ABI=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-D__STDC_FORMAT_MACROS' \
+	'-DOPENSSL_NO_PINSHARED' \
+	'-DOPENSSL_THREADS' \
 	'-DBUILDING_NODE_EXTENSION'
 
 # Flags passed to all source files.
@@ -80,16 +86,16 @@ CFLAGS_C_Release := \
 CFLAGS_CC_Release := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y
+	-std=gnu++14
 
 INCS_Release := \
-	-I/home/dan/.cache/node-gyp/15.6.0/include/node \
-	-I/home/dan/.cache/node-gyp/15.6.0/src \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/openssl/config \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/openssl/openssl/include \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/uv/include \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/zlib \
-	-I/home/dan/.cache/node-gyp/15.6.0/deps/v8/include \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/include/node \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/src \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/openssl/config \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/openssl/openssl/include \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/uv/include \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/zlib \
+	-I/home/trivernis/.cache/node-gyp/16.13.2/deps/v8/include \
 	-I$(srcdir)/node_modules/nan \
 	-I$(srcdir)/src
 
@@ -108,25 +114,25 @@ $(OBJS): GYP_CXXFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(B
 
 # Suffix rules, putting all outputs into $(obj).
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cc FORCE_DO_CMD
-	@$(call do_cmd,cxx,1)
-
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.c FORCE_DO_CMD
 	@$(call do_cmd,cc,1)
 
-# Try building from generated source, too.
-
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cc FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
+
+# Try building from generated source, too.
 
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.c FORCE_DO_CMD
 	@$(call do_cmd,cc,1)
 
-$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cc FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.c FORCE_DO_CMD
 	@$(call do_cmd,cc,1)
+
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
+	@$(call do_cmd,cxx,1)
 
 # End of this set of suffix rules
 ### Rules for final target.

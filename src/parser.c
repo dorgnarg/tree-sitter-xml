@@ -5,7 +5,7 @@
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
-#define LANGUAGE_VERSION 12
+#define LANGUAGE_VERSION 13
 #define STATE_COUNT 483
 #define LARGE_STATE_COUNT 2
 #define SYMBOL_COUNT 172
@@ -14,6 +14,7 @@
 #define EXTERNAL_TOKEN_COUNT 0
 #define FIELD_COUNT 0
 #define MAX_ALIAS_SEQUENCE_LENGTH 11
+#define PRODUCTION_ID_COUNT 13
 
 enum {
   aux_sym__name_char_token1 = 1,
@@ -197,7 +198,7 @@ enum {
   alias_sym_tag_name = 179,
 };
 
-static const char *ts_symbol_names[] = {
+static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [aux_sym__name_char_token1] = "_name_char_token1",
   [anon_sym_DOT] = ".",
@@ -380,7 +381,7 @@ static const char *ts_symbol_names[] = {
   [alias_sym_tag_name] = "tag_name",
 };
 
-static TSSymbol ts_symbol_map[] = {
+static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [aux_sym__name_char_token1] = aux_sym__name_char_token1,
   [anon_sym_DOT] = anon_sym_DOT,
@@ -1286,7 +1287,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
 };
 
-static TSSymbol ts_alias_sequences[13][MAX_ALIAS_SEQUENCE_LENGTH] = {
+static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
   [0] = {0},
   [1] = {
     [1] = alias_sym_tag_name,
@@ -1326,7 +1327,7 @@ static TSSymbol ts_alias_sequences[13][MAX_ALIAS_SEQUENCE_LENGTH] = {
   },
 };
 
-static uint16_t ts_non_terminal_alias_map[] = {
+static const uint16_t ts_non_terminal_alias_map[] = {
   sym__name, 9,
     sym__name,
     alias_sym_attlist_name,
@@ -1340,36 +1341,38 @@ static uint16_t ts_non_terminal_alias_map[] = {
   0,
 };
 
-static inline bool aux_sym__name_char_token3_character_set_1(int32_t lookahead) {
-  return
-    lookahead == 1471 ||
-    lookahead == 1476 ||
-    lookahead == 1648 ||
-    lookahead == 2364 ||
-    lookahead == 2381 ||
-    lookahead == 2492 ||
-    lookahead == 2494 ||
-    lookahead == 2495 ||
-    lookahead == 2519 ||
-    lookahead == 2562 ||
-    lookahead == 2620 ||
-    lookahead == 2622 ||
-    lookahead == 2623;
+static inline bool aux_sym__name_char_token3_character_set_1(int32_t c) {
+  return (c < 2492
+    ? (c < 1648
+      ? (c < 1476
+        ? c == 1471
+        : c <= 1476)
+      : (c <= 1648 || (c < 2381
+        ? c == 2364
+        : c <= 2381)))
+    : (c <= 2492 || (c < 2562
+      ? (c < 2519
+        ? (c >= 2494 && c <= 2495)
+        : c <= 2519)
+      : (c <= 2562 || (c < 2622
+        ? c == 2620
+        : c <= 2623)))));
 }
 
-static inline bool aux_sym__name_char_token8_character_set_1(int32_t lookahead) {
-  return
-    lookahead == 183 ||
-    lookahead == 720 ||
-    lookahead == 721 ||
-    lookahead == 903 ||
-    lookahead == 1600 ||
-    (2763 <= lookahead && lookahead <= 2765) ||
-    (2817 <= lookahead && lookahead <= 2819) ||
-    lookahead == 2876 ||
-    lookahead == 3654 ||
-    lookahead == 3782 ||
-    lookahead == 12442;
+static inline bool aux_sym__name_char_token8_character_set_1(int32_t c) {
+  return (c < 2817
+    ? (c < 903
+      ? (c < 720
+        ? c == 183
+        : c <= 721)
+      : (c <= 903 || (c < 2763
+        ? c == 1600
+        : c <= 2765)))
+    : (c <= 2819 || (c < 3782
+      ? (c < 3654
+        ? c == 2876
+        : c <= 3654)
+      : (c <= 3782 || c == 12442))));
 }
 
 static bool ts_lex(TSLexer *lexer, TSStateId state) {
@@ -1410,6 +1413,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(163);
       if (aux_sym__name_char_token3_character_set_1(lookahead)) ADVANCE(169);
       if (aux_sym__name_char_token8_character_set_1(lookahead)) ADVANCE(174);
+      if ((3014 <= lookahead && lookahead <= 3016) ||
+          (3018 <= lookahead && lookahead <= 3021) ||
+          lookahead == 3031 ||
+          (3398 <= lookahead && lookahead <= 3400) ||
+          (3402 <= lookahead && lookahead <= 3405) ||
+          lookahead == 3415 ||
+          lookahead == 3633) ADVANCE(176);
       if ((2496 <= lookahead && lookahead <= 2500) ||
           lookahead == 2503 ||
           lookahead == 2504 ||
@@ -1419,13 +1429,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           (2624 <= lookahead && lookahead <= 2626) ||
           lookahead == 2631 ||
           lookahead == 2632) ADVANCE(172);
-      if ((3014 <= lookahead && lookahead <= 3016) ||
-          (3018 <= lookahead && lookahead <= 3021) ||
-          lookahead == 3031 ||
-          (3398 <= lookahead && lookahead <= 3400) ||
-          (3402 <= lookahead && lookahead <= 3405) ||
-          lookahead == 3415 ||
-          lookahead == 3633) ADVANCE(176);
       if ((2878 <= lookahead && lookahead <= 2883) ||
           lookahead == 2887 ||
           lookahead == 2888 ||
@@ -1451,8 +1454,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 3158 ||
           lookahead == 3202 ||
           lookahead == 3203) ADVANCE(177);
-      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(163);
-      if (('a' <= lookahead && lookahead <= 'z')) ADVANCE(163);
       if ((3262 <= lookahead && lookahead <= 3268) ||
           (3270 <= lookahead && lookahead <= 3272) ||
           (3274 <= lookahead && lookahead <= 3277) ||
@@ -1461,6 +1462,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 3330 ||
           lookahead == 3331 ||
           (3390 <= lookahead && lookahead <= 3395)) ADVANCE(178);
+      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(163);
+      if (('a' <= lookahead && lookahead <= 'z')) ADVANCE(163);
       if (lookahead == 1473 ||
           lookahead == 1474 ||
           (1611 <= lookahead && lookahead <= 1618) ||
@@ -2107,6 +2110,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == ' ') ADVANCE(183);
       if (aux_sym__name_char_token3_character_set_1(lookahead)) ADVANCE(169);
       if (aux_sym__name_char_token8_character_set_1(lookahead)) ADVANCE(174);
+      if ((3014 <= lookahead && lookahead <= 3016) ||
+          (3018 <= lookahead && lookahead <= 3021) ||
+          lookahead == 3031 ||
+          (3398 <= lookahead && lookahead <= 3400) ||
+          (3402 <= lookahead && lookahead <= 3405) ||
+          lookahead == 3415 ||
+          lookahead == 3633) ADVANCE(176);
       if ((2496 <= lookahead && lookahead <= 2500) ||
           lookahead == 2503 ||
           lookahead == 2504 ||
@@ -2116,13 +2126,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           (2624 <= lookahead && lookahead <= 2626) ||
           lookahead == 2631 ||
           lookahead == 2632) ADVANCE(172);
-      if ((3014 <= lookahead && lookahead <= 3016) ||
-          (3018 <= lookahead && lookahead <= 3021) ||
-          lookahead == 3031 ||
-          (3398 <= lookahead && lookahead <= 3400) ||
-          (3402 <= lookahead && lookahead <= 3405) ||
-          lookahead == 3415 ||
-          lookahead == 3633) ADVANCE(176);
       if ((2878 <= lookahead && lookahead <= 2883) ||
           lookahead == 2887 ||
           lookahead == 2888 ||
@@ -2227,6 +2230,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == ' ') ADVANCE(183);
       if (aux_sym__name_char_token3_character_set_1(lookahead)) ADVANCE(169);
       if (aux_sym__name_char_token8_character_set_1(lookahead)) ADVANCE(174);
+      if ((3014 <= lookahead && lookahead <= 3016) ||
+          (3018 <= lookahead && lookahead <= 3021) ||
+          lookahead == 3031 ||
+          (3398 <= lookahead && lookahead <= 3400) ||
+          (3402 <= lookahead && lookahead <= 3405) ||
+          lookahead == 3415 ||
+          lookahead == 3633) ADVANCE(176);
       if ((2496 <= lookahead && lookahead <= 2500) ||
           lookahead == 2503 ||
           lookahead == 2504 ||
@@ -2236,13 +2246,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           (2624 <= lookahead && lookahead <= 2626) ||
           lookahead == 2631 ||
           lookahead == 2632) ADVANCE(172);
-      if ((3014 <= lookahead && lookahead <= 3016) ||
-          (3018 <= lookahead && lookahead <= 3021) ||
-          lookahead == 3031 ||
-          (3398 <= lookahead && lookahead <= 3400) ||
-          (3402 <= lookahead && lookahead <= 3405) ||
-          lookahead == 3415 ||
-          lookahead == 3633) ADVANCE(176);
       if ((2878 <= lookahead && lookahead <= 2883) ||
           lookahead == 2887 ||
           lookahead == 2888 ||
@@ -2340,6 +2343,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == ' ') ADVANCE(183);
       if (aux_sym__name_char_token3_character_set_1(lookahead)) ADVANCE(169);
       if (aux_sym__name_char_token8_character_set_1(lookahead)) ADVANCE(174);
+      if ((3014 <= lookahead && lookahead <= 3016) ||
+          (3018 <= lookahead && lookahead <= 3021) ||
+          lookahead == 3031 ||
+          (3398 <= lookahead && lookahead <= 3400) ||
+          (3402 <= lookahead && lookahead <= 3405) ||
+          lookahead == 3415 ||
+          lookahead == 3633) ADVANCE(176);
       if ((2496 <= lookahead && lookahead <= 2500) ||
           lookahead == 2503 ||
           lookahead == 2504 ||
@@ -2349,13 +2359,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           (2624 <= lookahead && lookahead <= 2626) ||
           lookahead == 2631 ||
           lookahead == 2632) ADVANCE(172);
-      if ((3014 <= lookahead && lookahead <= 3016) ||
-          (3018 <= lookahead && lookahead <= 3021) ||
-          lookahead == 3031 ||
-          (3398 <= lookahead && lookahead <= 3400) ||
-          (3402 <= lookahead && lookahead <= 3405) ||
-          lookahead == 3415 ||
-          lookahead == 3633) ADVANCE(176);
       if ((2878 <= lookahead && lookahead <= 2883) ||
           lookahead == 2887 ||
           lookahead == 2888 ||
@@ -2772,7 +2775,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
   }
 }
 
-static TSLexMode ts_lex_modes[STATE_COUNT] = {
+static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [0] = {.lex_state = 0},
   [1] = {.lex_state = 159},
   [2] = {.lex_state = 159},
@@ -3258,7 +3261,7 @@ static TSLexMode ts_lex_modes[STATE_COUNT] = {
   [482] = {.lex_state = 0},
 };
 
-static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
+static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [0] = {
     [ts_builtin_sym_end] = ACTIONS(1),
     [aux_sym__name_char_token1] = ACTIONS(1),
@@ -3345,7 +3348,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   },
 };
 
-static uint16_t ts_small_parse_table[] = {
+static const uint16_t ts_small_parse_table[] = {
   [0] = 3,
     STATE(2), 2,
       sym__name_char,
@@ -7654,7 +7657,7 @@ static uint16_t ts_small_parse_table[] = {
       aux_sym_names_token1,
 };
 
-static uint32_t ts_small_parse_table_map[] = {
+static const uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(2)] = 0,
   [SMALL_STATE(3)] = 36,
   [SMALL_STATE(4)] = 72,
@@ -8138,7 +8141,7 @@ static uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(482)] = 5604,
 };
 
-static TSParseActionEntry ts_parse_actions[] = {
+static const TSParseActionEntry ts_parse_actions[] = {
   [0] = {.entry = {.count = 0, .reusable = false}},
   [1] = {.entry = {.count = 1, .reusable = false}}, RECOVER(),
   [3] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_document, 0),
@@ -8747,27 +8750,28 @@ extern "C" {
 #endif
 
 extern const TSLanguage *tree_sitter_xml(void) {
-  static TSLanguage language = {
+  static const TSLanguage language = {
     .version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,
     .alias_count = ALIAS_COUNT,
     .token_count = TOKEN_COUNT,
     .external_token_count = EXTERNAL_TOKEN_COUNT,
+    .state_count = STATE_COUNT,
+    .large_state_count = LARGE_STATE_COUNT,
+    .production_id_count = PRODUCTION_ID_COUNT,
+    .field_count = FIELD_COUNT,
+    .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
+    .parse_table = &ts_parse_table[0][0],
+    .small_parse_table = ts_small_parse_table,
+    .small_parse_table_map = ts_small_parse_table_map,
+    .parse_actions = ts_parse_actions,
     .symbol_names = ts_symbol_names,
     .symbol_metadata = ts_symbol_metadata,
-    .parse_table = (const uint16_t *)ts_parse_table,
-    .parse_actions = ts_parse_actions,
-    .lex_modes = ts_lex_modes,
-    .alias_sequences = (const TSSymbol *)ts_alias_sequences,
-    .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
-    .lex_fn = ts_lex,
-    .field_count = FIELD_COUNT,
-    .large_state_count = LARGE_STATE_COUNT,
-    .small_parse_table = (const uint16_t *)ts_small_parse_table,
-    .small_parse_table_map = (const uint32_t *)ts_small_parse_table_map,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,
-    .state_count = STATE_COUNT,
+    .alias_sequences = &ts_alias_sequences[0][0],
+    .lex_modes = ts_lex_modes,
+    .lex_fn = ts_lex,
   };
   return &language;
 }
