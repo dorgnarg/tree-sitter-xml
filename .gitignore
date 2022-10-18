@@ -106,3 +106,4 @@ dist
 .eslintrc.js
 
 highlight_test.html
+/target/
