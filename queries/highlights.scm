@@ -16,7 +16,7 @@
     "#PCDATA"
 ] @keyword.directive
 
-(tag_name) @variable
+(tag_name) @tag
 
 (attribute_name) @constructor
 [
@@ -25,3 +25,7 @@
     "standalone"
 ] @constructor
 (attribute_value) @string
+
+[
+    "<" ">" "</" "/>" "<?" "?>" "<!"
+] @punctuation.bracket

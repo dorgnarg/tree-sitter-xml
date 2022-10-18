@@ -590,32 +590,32 @@ module.exports = grammar({
         ),
 
         include_sect: $ => seq(
-            '<![',
+            '<!', '[',
             optional(/\s/),
             'INCLUDE',
             optional(/\s/),
             '[',
             repeat($.external_subset_decl),
-            ']]>'
+            ']]', '>'
         ),
 
         ignore_sect: $ => seq(
-            '<![',
+            '<!', '[',
             optional(/\s/),
             'IGNORE',
             optional(/\s/),
             '[',
             repeat($.ignore_sect_contents),
-            ']]>'
+            ']]', '>'
         ),
 
         ignore_sect_contents: $ => seq(
             $.ignore,
             repeat(
                 seq(
-                    '<![',
+                    '<!','[',
                     $.ignore_sect_contents,
-                    ']]>',
+                    ']]', '>',
                     $.ignore
                 ),
             )

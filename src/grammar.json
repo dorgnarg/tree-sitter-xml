@@ -2293,7 +2293,11 @@
       "members": [
         {
           "type": "STRING",
-          "value": "<!["
+          "value": "<!"
+        },
+        {
+          "type": "STRING",
+          "value": "["
         },
         {
           "type": "CHOICE",
@@ -2336,7 +2340,11 @@
         },
         {
           "type": "STRING",
-          "value": "]]>"
+          "value": "]]"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
         }
       ]
     },
@@ -2345,7 +2353,11 @@
       "members": [
         {
           "type": "STRING",
-          "value": "<!["
+          "value": "<!"
+        },
+        {
+          "type": "STRING",
+          "value": "["
         },
         {
           "type": "CHOICE",
@@ -2388,7 +2400,11 @@
         },
         {
           "type": "STRING",
-          "value": "]]>"
+          "value": "]]"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
         }
       ]
     },
@@ -2406,7 +2422,11 @@
             "members": [
               {
                 "type": "STRING",
-                "value": "<!["
+                "value": "<!"
+              },
+              {
+                "type": "STRING",
+                "value": "["
               },
               {
                 "type": "SYMBOL",
@@ -2414,7 +2434,11 @@
               },
               {
                 "type": "STRING",
-                "value": "]]>"
+                "value": "]]"
+              },
+              {
+                "type": "STRING",
+                "value": ">"
               },
               {
                 "type": "SYMBOL",
@@ -2533,7 +2557,11 @@
       "members": [
         {
           "type": "STRING",
-          "value": "<!ENTITY"
+          "value": "<!"
+        },
+        {
+          "type": "STRING",
+          "value": "ENTITY"
         },
         {
           "type": "PATTERN",
@@ -2574,7 +2602,11 @@
       "members": [
         {
           "type": "STRING",
-          "value": "<!ENTITY"
+          "value": "<!"
+        },
+        {
+          "type": "STRING",
+          "value": "ENTITY"
         },
         {
           "type": "PATTERN",

@@ -1095,10 +1095,6 @@
     "named": false
   },
   {
-    "type": "<!ENTITY",
-    "named": false
-  },
-  {
     "type": "<![",
     "named": false
   },
@@ -1219,7 +1215,7 @@
     "named": false
   },
   {
-    "type": "]]>",
+    "type": "]]",
     "named": false
   },
   {
