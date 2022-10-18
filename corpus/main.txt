@@ -8,10 +8,12 @@ Prolog
 (document
   (prolog
     (xml_decl
-      (version_info)
+      (version_info
+        (attribute_value))
       (encoding_decl
         (attribute_value))
-      (standalone_decl))
+      (standalone_decl
+        (attribute_value)))
     (doctype_decl
       (doctype)
       (external_id

@@ -4,9 +4,8 @@
 
 [
     "DOCTYPE"
-    "EMPTY"
-    "ANY"
     "ELEMENT"
+    "ATTLIST"
 ] @keyword
 
 [
@@ -15,15 +14,26 @@
     "#FIXED"
     "#PCDATA"
 ] @keyword.directive
+    
+[
+    "EMPTY"
+    "ANY"
+    "SYSTEM"
+    "PUBLIC"
+] @constant
 
+"xml" @tag
 (tag_name) @tag
 
-(attribute_name) @constructor
+(attribute_name) @attribute
 [
     "encoding"
     "version"
     "standalone"
-] @constructor
+] @attribute
+
+(system_literal) @string
+(pubid_literal) @string
 (attribute_value) @string
 
 [

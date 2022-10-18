@@ -480,7 +480,11 @@
       "members": [
         {
           "type": "STRING",
-          "value": "<!["
+          "value": "<!"
+        },
+        {
+          "type": "STRING",
+          "value": "["
         },
         {
           "type": "STRING",
@@ -497,8 +501,17 @@
       "value": "."
     },
     "_cdata_end": {
-      "type": "STRING",
-      "value": "]]>"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "]]"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
     },
     "prolog": {
       "type": "PREC_RIGHT",
@@ -994,61 +1007,64 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "'"
-                  },
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "yes"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "no"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "'"
-                  }
-                ]
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "\""
-                  },
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "yes"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "no"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "\""
-                  }
-                ]
-              }
-            ]
+            "type": "TOKEN",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "'"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "yes"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "no"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "'"
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "\""
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "yes"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "no"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "\""
+                    }
+                  ]
+                }
+              ]
+            }
           },
           "named": true,
           "value": "attribute_value"
