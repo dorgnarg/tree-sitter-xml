@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf8' standalone="no"?>
+<!DOCTYPE greeting [
+    <!ELEMENT greeting (#PCDATA)>
+]>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<SPAN id="id" class='class'></SPAN>
 <CATALOG>
   <CD>
     <TITLE>Empire Burlesque</TITLE>
@@ -48,6 +53,7 @@
     <PRICE>10.90</PRICE>
     <YEAR>1998</YEAR>
   </CD>
+  <!-- This is a comment -->
   <CD>
     <TITLE>Sylvias Mother</TITLE>
     <ARTIST>Dr.Hook</ARTIST>

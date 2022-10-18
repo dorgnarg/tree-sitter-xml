@@ -1,101 +1,112 @@
-==================================
+================================================================================
 Prolog
-==================================
+================================================================================
 <?xml version='1.0' encoding='utf8' standalone="no"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
----
+--------------------------------------------------------------------------------
 
 (document
-    (prolog
-    (xml_decl (version_info) (encoding_decl) (standalone_decl))
-    (doctype_decl (doctype) (external_id (system_literal)))))
+  (prolog
+    (xml_decl
+      (version_info)
+      (encoding_decl
+        (attribute_value))
+      (standalone_decl))
+    (doctype_decl
+      (doctype)
+      (external_id
+        (system_literal)))))
 
-
-==================================
+================================================================================
 Element declaration
-==================================
+================================================================================
 <!DOCTYPE greeting [
     <!ELEMENT greeting (#PCDATA)>
 ]>
----
+--------------------------------------------------------------------------------
 
 (document
-    (prolog
+  (prolog
     (doctype_decl
-        (doctype)
-        (element_decl
-            (element_name)
-            (content_spec
-                (mixed))))))
+      (doctype)
+      (element_decl
+        (element_name)
+        (content_spec
+          (mixed))))))
 
-==================================
+================================================================================
 Tags
-==================================
+================================================================================
 <ARTIST></ARTIST>
----
+--------------------------------------------------------------------------------
 
 (document
-    (element
+  (element
     (start_tag
-        (tag_name))
+      (tag_name))
     (end_tag
-        (tag_name))))
+      (tag_name))))
 
-==================================
+================================================================================
 Tags with attributes
-==================================
+================================================================================
 <SPAN id="id" class='class'></SPAN>
----
+--------------------------------------------------------------------------------
 
 (document
-    (element
+  (element
     (start_tag
-        (tag_name)
-        (attribute
-            (attribute_name) (attribute_value))
-        (attribute
-            (attribute_name) (attribute_value)))
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (attribute_value))
+      (attribute
+        (attribute_name)
+        (attribute_value)))
     (end_tag
-        (tag_name))))
+      (tag_name))))
 
-==================================
+================================================================================
 Nested tags
-==================================
+================================================================================
 <SPAN><div>Content</div></SPAN>
----
+--------------------------------------------------------------------------------
 
 (document
-    (element
+  (element
     (start_tag
+      (tag_name))
+    (element
+      (start_tag
         (tag_name))
-        (element
-        (start_tag
-            (tag_name))
-            (text)
-        (end_tag
-            (tag_name)))
+      (text)
+      (end_tag
+        (tag_name)))
     (end_tag
-        (tag_name))))
+      (tag_name))))
 
-==================================
+================================================================================
 Empty element tags (w/ attributes)
-==================================
+================================================================================
 <span id="id" class='class' />
----
+--------------------------------------------------------------------------------
 
 (document
-    (element
-        (empty_elem_tag
-            (tag_name)
-            (attribute
-                (attribute_name) (attribute_value))
-            (attribute
-                (attribute_name) (attribute_value)))))
+  (element
+    (empty_elem_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (attribute_value))
+      (attribute
+        (attribute_name)
+        (attribute_value)))))
 
-==================================
+================================================================================
 Comments
-==================================
+================================================================================
 <!-- This is a comment! -->
----
+--------------------------------------------------------------------------------
 
-(document (comment))
+(document
+  (comment))

@@ -1,3 +1,5 @@
+const in_quotes = (rule) => choice(seq("'", rule, "'"), seq("\"", rule, "\""));
+
 module.exports = grammar({
     name: 'xml',
 
@@ -16,7 +18,7 @@ module.exports = grammar({
 
         /** Names and Tokens **/
 
-        _name_char: $ => choice (
+        _name_char: $ => choice(
             /\w/,
             '.',
             '-',
@@ -37,13 +39,13 @@ module.exports = grammar({
             /[\u0F99-\u0FAD\u0FB1-\u0FB7\u0FB9\u20D0-\u20DC\u20E1\u302A-\u302F\u3099]/,
         ),
 
-        _name: $ => seq (
-            choice (
+        _name: $ => seq(
+            choice(
                 /\w/,
                 '_',
                 ':',
             ),
-            repeat (
+            repeat(
                 $._name_char
             )
         ),
@@ -58,7 +60,7 @@ module.exports = grammar({
 
         nm_token: $ => repeat1($._name_char),
 
-        nm_tokens: $ => seq (
+        nm_tokens: $ => seq(
             $.nm_token,
             repeat(seq(
                 /\s/,
@@ -68,7 +70,7 @@ module.exports = grammar({
 
         /** Literals **/
 
-        entity_value: $ => choice (
+        entity_value: $ => choice(
             seq(
                 '"',
                 repeat(choice(
@@ -79,54 +81,16 @@ module.exports = grammar({
             )
         ),
 
-        attribute_value: $ => choice (
-            seq (
-                '"',
-                repeat(choice(
-                    /[^<&"]/,
-                    $.reference
-                )),
-                '"'
-            ),
-            seq (
-                "'",
-                repeat(choice(
-                    /[^<&"]/,
-                    $.reference
-                )),
-                "'"
-            )
+        attribute_value: $ => in_quotes(
+            repeat(choice(
+                /[^<&"]/,
+                $.reference
+            )),
         ),
 
-        system_literal: $ => choice(
-            seq(
-                '"',
-                /[^"]*/,
-                '"'
-            ),
-            seq(
-                "'",
-                /[^"]*/,
-                "'"
-            )
-        ),
+        system_literal: $ => in_quotes(/[^"]*/),
 
-        pubid_literal: $ => choice (
-            seq(
-                '"',
-                repeat(
-                    $.pubid_char
-                ),
-                '"'
-            ),
-            seq(
-                "'",
-                repeat(
-                    $.pubid_char
-                ),
-                "'"
-            ),
-        ),
+        pubid_literal: $ => in_quotes(repeat($.pubid_char),),
 
         pubid_char: $ => /[ \r\na-zA-Z0-9-"()+,./:=?;!*#@$_%]/,
 
@@ -136,7 +100,7 @@ module.exports = grammar({
 
         /** Comments **/
 
-        comment: $ => seq (
+        comment: $ => seq(
             '<!--',
             repeat(
                 seq(
@@ -149,7 +113,7 @@ module.exports = grammar({
 
         /** Processing instructions **/
 
-        processing_instructions: $ => seq (
+        processing_instructions: $ => seq(
             '<?',
             $.pi_target,
             optional(seq(
@@ -169,7 +133,7 @@ module.exports = grammar({
             $._cdata_end
         ),
 
-        _cdata_start: $ => '<![CDATA[',
+        _cdata_start: $ => seq('<![', 'CDATA', '['),
 
         cdata: $ => /./,
 
@@ -195,8 +159,8 @@ module.exports = grammar({
             ),
         )),
 
-        xml_decl: $ => seq (
-            '<?xml',
+        xml_decl: $ => seq(
+            '<?', 'xml',
             /\s/,
             $.version_info,
             optional($.encoding_decl),
@@ -208,18 +172,7 @@ module.exports = grammar({
         version_info: $ => seq(
             'version',
             $._eq,
-            choice(
-                seq(
-                    '"',
-                    $._version_num,
-                    '"'
-                ),
-                seq(
-                    "'",
-                    $._version_num,
-                    "'"
-                )
-            ),
+            alias($._version_num, $.attribute_value)
         ),
 
         _eq: $ => seq(
@@ -228,9 +181,8 @@ module.exports = grammar({
             optional(/\s/),
         ),
 
-        _version_num: $ => seq (
-            '1.',
-            /[0-9]+/,
+        _version_num: $ => in_quotes(
+            seq('1.', /[0-9]+/)
         ),
 
         _misc: $ => choice(
@@ -241,10 +193,10 @@ module.exports = grammar({
 
         /** Document Type Definition **/
 
-        doctype_decl: $ => seq (
-            '<!DOCTYPE',
+        doctype_decl: $ => seq(
+            '<!', 'DOCTYPE',
             /\s/,
-            alias($._name,$.doctype),
+            alias($._name, $.doctype),
             optional(seq(/\s/, $.external_id)),
             optional(/\s/),
             optional(seq(
@@ -289,23 +241,14 @@ module.exports = grammar({
             /\s/,
             'standalone',
             $._eq,
-            choice(
-                seq(
-                    '"',
+            alias(
+                in_quotes(
                     choice(
                         'yes',
                         'no'
                     ),
-                    '"'
                 ),
-                seq(
-                    "'",
-                    choice(
-                        'yes',
-                        'no'
-                    ),
-                    "'"
-                )
+                $.attribute_value
             )
         ),
 
@@ -384,11 +327,11 @@ module.exports = grammar({
 
         /** Start-tag **/
 
-        start_tag: $ => seq (
+        start_tag: $ => seq(
             '<',
             alias($._name, $.tag_name),
             repeat(
-                seq (
+                seq(
                     /\s/,
                     $.attribute
                 )
@@ -405,7 +348,7 @@ module.exports = grammar({
 
         /** End-tag **/
 
-        end_tag: $ => seq ( // TODO: Make sure closing tag matches opening tag?
+        end_tag: $ => seq( // TODO: Make sure closing tag matches opening tag?
             '</',
             alias($._name, $.tag_name),
             optional(/\s/),
@@ -414,7 +357,7 @@ module.exports = grammar({
 
         /** Content of Elements **/
 
-        _content: $ => repeat1 ( choice (
+        _content: $ => repeat1(choice(
             $.element,
             $.cdata_sect,
             alias($._char_data, $.text),
@@ -425,11 +368,11 @@ module.exports = grammar({
 
         /** Tags for Empty Elements **/
 
-        empty_elem_tag: $ => seq (
+        empty_elem_tag: $ => seq(
             '<',
             alias($._name, $.tag_name),
             repeat(
-                seq (
+                seq(
                     /\s/,
                     $.attribute
                 )
@@ -441,7 +384,7 @@ module.exports = grammar({
         /** Element Type Declaration **/
 
         element_decl: $ => seq(
-            '<!ELEMENT',
+            '<!', 'ELEMENT',
             /\s/,
             alias($._name, $.element_name),
             /\s/,
@@ -546,7 +489,7 @@ module.exports = grammar({
         /** Attribute-list Declaration **/
 
         attlist_decl: $ => seq(
-            '<!ATTLIST',
+            '<!', 'ATTLIST',
             /\s/,
             alias($._name, $.attlist_name),
             repeat($.attribute_def),
@@ -585,7 +528,7 @@ module.exports = grammar({
 
         /** Enumerated Attribute Types **/
 
-        _enumerated_type: $ => choice (
+        _enumerated_type: $ => choice(
             $.notation_type,
             $.enumeration
         ),
@@ -601,7 +544,7 @@ module.exports = grammar({
                     optional(/\s/),
                     '|',
                     optional(/\s/),
-                    alias($._name,$.notation_type_name),
+                    alias($._name, $.notation_type_name),
                 ),
             ),
             ')'
@@ -697,7 +640,7 @@ module.exports = grammar({
 
         /** Entity Reference **/
 
-        reference: $ => choice (
+        reference: $ => choice(
             $.entity_ref,
             $.char_ref
         ),
@@ -722,7 +665,7 @@ module.exports = grammar({
         ),
 
         ge_decl: $ => seq(
-            '<!ENTITY',
+            '<!', 'ENTITY',
             /\s/,
             $._name,
             /\s/,
@@ -732,7 +675,7 @@ module.exports = grammar({
         ),
 
         pe_decl: $ => seq(
-            '<!ENTITY',
+            '<!', 'ENTITY',
             /\s/,
             '%',
             /\s/,
@@ -758,7 +701,7 @@ module.exports = grammar({
 
         /** External Entity Declaration **/
 
-        external_id: $ => choice (
+        external_id: $ => choice(
             seq(
                 'SYSTEM',
                 /\s/,
@@ -783,7 +726,7 @@ module.exports = grammar({
         /** Text Declaration **/
 
         text_decl: $ => seq(
-            '<?xml',
+            '<?', 'xml',
             optional($.version_info),
             $.encoding_decl,
             optional(/\s/),
@@ -793,7 +736,7 @@ module.exports = grammar({
         /** Well-formed External Parsed Entity **/
 
 
-        external_parsed_ent: $ => seq( 
+        external_parsed_ent: $ => seq(
             optional($.text_decl),
             $._content
         ),
@@ -809,36 +752,27 @@ module.exports = grammar({
             /\s/,
             'encoding',
             $._eq,
-            choice(
-                seq(
-                    '"',
-                    $._enc_name,
-                    '"'
-                ),
-                seq(
-                    "'",
-                    $._enc_name,
-                    "'"
-                )
-            )
+            alias($._enc_name, $.attribute_value)
         ),
 
-        _enc_name: $ => seq(
-            /[A-Za-z]/,
-            repeat(
-                choice(
-                    /[A-Za-z0-9._]/,
-                    '-',
-                ),
-            ),
+        _enc_name: $ => in_quotes(
+            seq(
+                /[A-Za-z]/,
+                repeat(
+                    choice(
+                        /[A-Za-z0-9._]/,
+                        '-',
+                    ),
+                )
+            )
         ),
 
         /** Notation Declaration **/
 
         notation_decl: $ => seq(
-            '<!NOTATION',
+            '<!', 'NOTATION',
             /\s/,
-            alias($._name,$.notation_name),
+            alias($._name, $.notation_name),
             /\s/,
             choice(
                 $.external_id,
