@@ -22,15 +22,18 @@
     "PUBLIC"
 ] @constant
 
+(doctype) @module
+(element_name) @module
+
 "xml" @tag
 (tag_name) @tag
 
-(attribute_name) @attribute
 [
     "encoding"
     "version"
     "standalone"
 ] @attribute
+(attribute_name) @attribute
 
 (system_literal) @string
 (pubid_literal) @string
