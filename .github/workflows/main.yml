@@ -5,15 +5,13 @@ on:
 
 jobs:
   tree_sitter_test:
-    name: tree-sitter generate
+    name: tree-sitter test
     runs-on: ubuntu-latest
     container:
       image: alpine:latest
     steps:
     - uses: actions/checkout@v3
-    - name: Install tree-sitter, clang and nodejs
-      run: apk add tree-sitter-cli nodejs clang
-    - name: Run tree-sitter generate
-      run: tree-sitter generate
-    - name: Run tree-sitter test
-      run: tree-sitter test
+    - name: Install tree-sitter, gcc and nodejs
+      run: apk add build-base clang nodejs tree-sitter-cli
+    - run: tree-sitter generate
+    - run: tree-sitter test
