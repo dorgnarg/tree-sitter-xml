@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  tree_sitter_test:
+    name: tree-sitter generate
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install tree-sitter, clang and nodejs
+      run: apk add tree-sitter-cli nodejs clang
+    - name: Run tree-sitter generate
+      run: tree-sitter generate
+    - name: Run tree-sitter test
+      run: tree-sitter test
