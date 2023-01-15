@@ -1,5 +1,7 @@
 const in_quotes = (rule) => choice(seq("'", rule, "'"), seq('"', rule, '"'));
 
+const S = /[ \t\r\n]+/;
+
 module.exports = grammar({
   name: "xml",
 
@@ -45,18 +47,26 @@ module.exports = grammar({
     /** Literals **/
 
     entity_value: ($) =>
-      choice(seq('"', repeat(choice(/[^<&"]/, $.pe_reference, $.reference)))),
+      choice(('"', repeat(choice(/[^<&"]/, $.pe_reference, $.reference)), '"'),
+      ("'", repeat(choice(/[^<&']/, $.pe_reference, $.reference)), "'")),
 
-    attribute_value: ($) => in_quotes(repeat(choice(/[^<&"]/, $.reference))),
+    attribute_value: ($) => choice(
+      seq('"',repeat(choice(/[^<&"]/, $.reference)), '"'),
+      seq("'", repeat(choice(/[^<&']/, $.reference)), "'")
+    ),
 
-    system_literal: ($) => in_quotes(/[^"]*/),
+    system_literal: ($) => choice(seq('"',/[^"]*/, '"'), seq("'", /[^']/, "'")),
 
-    pubid_literal: ($) => in_quotes(repeat($.pubid_char)),
+    pubid_literal: ($) => choice(
+      seq( '"', repeat(choice($.pubid_char, "'")), '"'),
+      seq( "'", repeat($.pubid_char), "'")
+      ),
 
-    pubid_char: ($) => /[ \r\na-zA-Z0-9-"()+,./:=?;!*#@$_%]/,
+    pubid_char: ($) => /[ \r\n\ta-zA-Z0-9-()+,./:=?;!*#@$_%]/,
 
     /** Character Data **/
 
+    // FIXME: Should exclude ']]>'
     _char_data: ($) => /[^<&]+/,
 
     /** Comments **/
@@ -74,11 +84,11 @@ module.exports = grammar({
 
     cdata_sect: ($) => seq($._cdata_start, $.cdata, $._cdata_end),
 
-    _cdata_start: ($) => seq("<!", "[", "CDATA", "["),
+    _cdata_start: ($) => seq("<![", "CDATA", "["),
 
     cdata: ($) => /./,
 
-    _cdata_end: ($) => seq("]]", ">"),
+    _cdata_end: ($) => seq("]]>"),
 
     /** Prolog **/
 
@@ -106,11 +116,11 @@ module.exports = grammar({
     version_info: ($) =>
       seq("version", $._eq, alias($._version_num, $.attribute_value)),
 
-    _eq: ($) => seq(optional(/\s/), "=", optional(/\s/)),
+    _eq: ($) => seq(optional(S), "=", optional(S)),
 
     _version_num: ($) => in_quotes(seq("1.", /[0-9]+/)),
 
-    _misc: ($) => choice($.comment, $.processing_instructions, /\s/),
+    _misc: ($) => choice($.comment, $.processing_instructions, S),
 
     /** Document Type Definition **/
 
@@ -118,16 +128,16 @@ module.exports = grammar({
       seq(
         "<!",
         "DOCTYPE",
-        /\s/,
+        S,
         alias($._name, $.doctype),
-        optional(seq(/\s/, $.external_id)),
-        optional(/\s/),
+        optional(seq(S, $.external_id)),
+        optional(S),
         optional(
           seq(
             "[",
             repeat(choice($._markup_decl, $.pe_reference, /\s/)),
             "]",
-            optional(/\s/)
+            optional(S)
           )
         ),
         ">"
@@ -242,11 +252,11 @@ module.exports = grammar({
       seq(
         "<!",
         "ELEMENT",
-        /\s/,
+        S,
         alias($._name, $.element_name),
-        /\s/,
+        S,
         $.content_spec,
-        optional(/\s/),
+        optional(S),
         ">"
       ),
 

@@ -14,7 +14,7 @@
     "#FIXED"
     "#PCDATA"
 ] @keyword.directive
-    
+
 [
     "EMPTY"
     "ANY"
@@ -40,5 +40,5 @@
 (attribute_value) @string
 
 [
-    "<" ">" "</" "/>" "<?" "?>" "<!"
+    "<" ">" "</" "/>" "<?" "?>" "<!" "<![" "[" "]]>"
 ] @punctuation.bracket

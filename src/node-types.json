@@ -504,21 +504,7 @@
   {
     "type": "entity_value",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "pe_reference",
-          "named": true
-        },
-        {
-          "type": "reference",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "enumeration",
@@ -1095,6 +1081,10 @@
     "named": false
   },
   {
+    "type": "<![",
+    "named": false
+  },
+  {
     "type": "</",
     "named": false
   },
@@ -1212,6 +1202,10 @@
   },
   {
     "type": "]]",
+    "named": false
+  },
+  {
+    "type": "]]>",
     "named": false
   },
   {
