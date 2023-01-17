@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: renjisann/tree-sitter-check@v0.0.1
+    - uses: renjisann/tree-sitter-check@v0.0.4
