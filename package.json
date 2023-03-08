@@ -2,13 +2,13 @@
   "name": "tree-sitter-xml",
   "version": "0.17.3",
   "description": "XML grammar for tree-sitter",
-  "main": "index.js",
+  "main": "bindings/node",
   "keywords": [
     "parser",
     "lexer"
   ],
   "authors": [
-        "@Dorgnarg"
+    "@Dorgnarg"
   ],
   "license": "MIT",
   "dependencies": {

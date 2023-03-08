@@ -104,3 +104,6 @@ dist
 .tern-port
 
 .eslintrc.js
+
+highlight_test.html
+/target/

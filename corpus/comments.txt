@@ -1,0 +1,56 @@
+================================================================================
+Standalone comment
+================================================================================
+<!-- This is a comment! -->
+--------------------------------------------------------------------------------
+
+(document
+  (comment))
+
+================================================================================
+Comment after prolog
+================================================================================
+<?xml version='1.0' encoding='utf8' standalone="no"?>
+<!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX   -->
+--------------------------------------------------------------------------------
+
+(document
+  (prolog
+    (xml_decl
+      (version_info
+        (attribute_value))
+      (encoding_decl
+        (attribute_value))
+      (standalone_decl
+        (attribute_value))))
+    (comment))
+
+================================================================================
+Big comment after prolog non empty
+================================================================================
+<?xml version="1.0" encoding="utf-8"?>
+<!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX   -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+</svg>
+--------------------------------------------------------------------------------
+
+(document
+  (prolog
+    (xml_decl
+      (version_info
+        (attribute_value))
+      (encoding_decl
+        (attribute_value))))
+    (comment)
+    (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (attribute_value))
+      (attribute
+        (attribute_name)
+        (attribute_value)))
+    (text)
+    (end_tag
+      (tag_name))))

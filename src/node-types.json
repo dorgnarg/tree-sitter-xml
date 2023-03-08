@@ -427,7 +427,17 @@
   {
     "type": "encoding_decl",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "end_tag",
@@ -494,21 +504,7 @@
   {
     "type": "entity_value",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "pe_reference",
-          "named": true
-        },
-        {
-          "type": "reference",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "enumeration",
@@ -877,7 +873,17 @@
   {
     "type": "standalone_decl",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "start_tag",
@@ -935,7 +941,17 @@
   {
     "type": "version_info",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "xml_decl",
@@ -1057,27 +1073,11 @@
     "named": false
   },
   {
+    "type": "<!",
+    "named": false
+  },
+  {
     "type": "<!--",
-    "named": false
-  },
-  {
-    "type": "<!ATTLIST",
-    "named": false
-  },
-  {
-    "type": "<!DOCTYPE",
-    "named": false
-  },
-  {
-    "type": "<!ELEMENT",
-    "named": false
-  },
-  {
-    "type": "<!ENTITY",
-    "named": false
-  },
-  {
-    "type": "<!NOTATION",
     "named": false
   },
   {
@@ -1090,10 +1090,6 @@
   },
   {
     "type": "<?",
-    "named": false
-  },
-  {
-    "type": "<?xml",
     "named": false
   },
   {
@@ -1114,6 +1110,22 @@
   },
   {
     "type": "ANY",
+    "named": false
+  },
+  {
+    "type": "ATTLIST",
+    "named": false
+  },
+  {
+    "type": "CDATA",
+    "named": false
+  },
+  {
+    "type": "DOCTYPE",
+    "named": false
+  },
+  {
+    "type": "ELEMENT",
     "named": false
   },
   {
@@ -1189,6 +1201,10 @@
     "named": false
   },
   {
+    "type": "]]",
+    "named": false
+  },
+  {
     "type": "]]>",
     "named": false
   },
@@ -1202,10 +1218,6 @@
   },
   {
     "type": "i",
-    "named": false
-  },
-  {
-    "type": "no",
     "named": false
   },
   {
@@ -1229,7 +1241,7 @@
     "named": false
   },
   {
-    "type": "yes",
+    "type": "xml",
     "named": false
   },
   {
